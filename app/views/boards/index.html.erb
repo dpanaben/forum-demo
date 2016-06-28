@@ -1,0 +1,21 @@
+<h1><%= (t "welcome.listingboards") %></h1>
+<%= link_to 'CSV', '/boards.csv' %> |
+<%= link_to 'XML', '/boards.xml' %> |
+<%= link_to 'JSON', '/boards.json' %>
+
+<table>
+	<tr>
+		<th><%= (t "welcome.boardname") %></th>
+		<th><%= (t "welcome.postsize") %></th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+<% @boards.each do |board| %>
+	<tr>
+		<td><%= board.name %></td>
+		<td><%= board.posts.size %></td>
+		<td><%= link_to 'Show', board_path(board) %></td>
+	</tr>
+<% end %>
+</table>

@@ -1,0 +1,399 @@
+Connecting to database specified by database.yml
+  [1m[36m (0.1ms)[0m  [1mselect sqlite_version(*)[0m
+  [1m[35m (1.1ms)[0m  CREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) 
+  [1m[36m (0.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreateBoards (20120712080301)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "boards" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120712080301')[0m
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to CreatePosts (20120712080310)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "content" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120712080310')[0m
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to AddBoardIdToPost (20120712085748)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "posts" ADD "board_id" integer
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120712085748')[0m
+  [1m[35m (0.6ms)[0m  commit transaction
+Migrating to DeviseCreateUsers (20120712145050)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  CREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.6ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.2ms)[0m  CREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120712145050')[0m
+  [1m[35m (0.9ms)[0m  commit transaction
+Migrating to AddUserIdToPost (20120712150946)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  ALTER TABLE "posts" ADD "user_id" integer
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120712150946')[0m
+  [1m[35m (0.6ms)[0m  commit transaction
+Migrating to AddIsAdminToUser (20120712152728)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  ALTER TABLE "users" ADD "is_admin" boolean DEFAULT 'f'
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20120712152728')[0m
+  [1m[35m (1.3ms)[0m  commit transaction
+  [1m[36m (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35m (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'admin@example.org' LIMIT 1
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[36mSQL (2.9ms)[0m  [1mINSERT INTO "users" ("created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "is_admin", "last_sign_in_at", "last_sign_in_ip", "remember_created_at", "reset_password_sent_at", "reset_password_token", "sign_in_count", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["created_at", Sun, 19 Jun 2016 19:43:54 CST +08:00], ["current_sign_in_at", nil], ["current_sign_in_ip", nil], ["email", "admin@example.org"], ["encrypted_password", "$2a$10$F/8BS8RukIcbqqPPVEHnpuxX.uEuZZLHknQbsrWA4IqZupskvlZeC"], ["is_admin", true], ["last_sign_in_at", nil], ["last_sign_in_ip", nil], ["remember_created_at", nil], ["reset_password_sent_at", nil], ["reset_password_token", nil], ["sign_in_count", 0], ["updated_at", Sun, 19 Jun 2016 19:43:54 CST +08:00]]
+  [1m[35m (1.1ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mUser Exists (0.2ms)[0m  SELECT 1 AS one FROM "users" WHERE "users"."email" = 'user1@example.org' LIMIT 1
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "users" ("created_at", "current_sign_in_at", "current_sign_in_ip", "email", "encrypted_password", "is_admin", "last_sign_in_at", "last_sign_in_ip", "remember_created_at", "reset_password_sent_at", "reset_password_token", "sign_in_count", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["created_at", Sun, 19 Jun 2016 19:43:54 CST +08:00], ["current_sign_in_at", nil], ["current_sign_in_ip", nil], ["email", "user1@example.org"], ["encrypted_password", "$2a$10$S3FVwWziPTRmDrzd35xaA.7whX0SLBL5MO3BbqtZ6Jj.Y9cAxYArG"], ["is_admin", false], ["last_sign_in_at", nil], ["last_sign_in_ip", nil], ["remember_created_at", nil], ["reset_password_sent_at", nil], ["reset_password_token", nil], ["sign_in_count", 0], ["updated_at", Sun, 19 Jun 2016 19:43:54 CST +08:00]]
+  [1m[35m (0.8ms)[0m  commit transaction
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "boards" ("created_at", "name", "updated_at") VALUES (?, ?, ?)  [["created_at", Sun, 19 Jun 2016 19:43:54 CST +08:00], ["name", "System Announcent"], ["updated_at", Sun, 19 Jun 2016 19:43:54 CST +08:00]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO "posts" ("board_id", "content", "created_at", "title", "updated_at", "user_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["board_id", 1], ["content", "This is a demo post"], ["created_at", Sun, 19 Jun 2016 19:43:54 CST +08:00], ["title", "First Post"], ["updated_at", Sun, 19 Jun 2016 19:43:54 CST +08:00], ["user_id", 1]]
+  [1m[35m (0.6ms)[0m  commit transaction
+
+
+Started GET "/" for 127.0.0.1 at 2016-06-19 19:44:01 +0800
+Processing by BoardsController#index as HTML
+  [1m[36mBoard Load (0.2ms)[0m  [1mSELECT "boards".* FROM "boards" [0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "posts" WHERE "posts"."board_id" = 1
+  Rendered boards/index.html.erb within layouts/application (25.4ms)
+  Rendered common/_user_nav.erb (79.9ms)
+Completed 200 OK in 154.6ms (Views: 129.8ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-06-19 19:44:01 +0800
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2016-06-19 19:44:01 +0800
+Warning. Error encountered while saving cache /Users/dpanaben/projectRoR/forum-demo/tmp/cache/sass/d38dc0bd94365d485929373261b4319950b59998/boards.css.scssc: can't dump anonymous class #<Class:0x007fb763088438>
+
+Served asset /posts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:01 +0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/boards.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:01 +0800
+Served asset /boards.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:01 +0800
+Served asset /posts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:01 +0800
+Served asset /application.js - 304 Not Modified (0ms)
+Compiled boards.css  (92ms)  (pid 14080)
+Warning. Error encountered while saving cache /Users/dpanaben/projectRoR/forum-demo/tmp/cache/sass/d38dc0bd94365d485929373261b4319950b59998/posts.css.scssc: can't dump anonymous class #<Class:0x007fb763088438>
+
+Compiled posts.css  (7ms)  (pid 14080)
+Compiled application.css  (147ms)  (pid 14080)
+Served asset /application.css - 304 Not Modified (172ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:01 +0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/boards.css?body=1" for 127.0.0.1 at 2016-06-19 19:44:01 +0800
+Served asset /boards.css - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-06-19 19:44:06 +0800
+Processing by BoardsController#index as HTML
+  [1m[36mBoard Load (0.2ms)[0m  [1mSELECT "boards".* FROM "boards" [0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "posts" WHERE "posts"."board_id" = 1
+  Rendered boards/index.html.erb within layouts/application (3.9ms)
+  Rendered common/_user_nav.erb (1.5ms)
+Completed 200 OK in 20.3ms (Views: 17.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-06-19 19:44:06 +0800
+Served asset /application.css - 304 Not Modified (3ms)
+
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:06 +0800
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2016-06-19 19:44:06 +0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+Served asset /posts.css - 304 Not Modified (0ms)
+
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:06 +0800
+
+Started GET "/assets/boards.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:06 +0800
+Served asset /jquery.js - 304 Not Modified (0ms)
+Served asset /boards.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/boards.css?body=1" for 127.0.0.1 at 2016-06-19 19:44:06 +0800
+Served asset /boards.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:06 +0800
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:06 +0800
+Served asset /posts.js - 304 Not Modified (0ms)
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started GET "/boards.csv" for 127.0.0.1 at 2016-06-19 19:44:34 +0800
+Processing by BoardsController#index as CSV
+  [1m[36mBoard Load (0.2ms)[0m  [1mSELECT "boards".* FROM "boards" [0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "posts" WHERE "posts"."board_id" = 1
+  Rendered text template (0.0ms)
+Completed 200 OK in 15.7ms (Views: 4.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/boards.csv" for 127.0.0.1 at 2016-06-19 19:44:35 +0800
+Processing by BoardsController#index as CSV
+  [1m[36mBoard Load (0.2ms)[0m  [1mSELECT "boards".* FROM "boards" [0m
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "posts" WHERE "posts"."board_id" = 1
+  Rendered text template (0.0ms)
+Completed 200 OK in 10.1ms (Views: 0.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/boards.json" for 127.0.0.1 at 2016-06-19 19:44:38 +0800
+Processing by BoardsController#index as JSON
+  [1m[36mBoard Load (0.2ms)[0m  [1mSELECT "boards".* FROM "boards" [0m
+Completed 200 OK in 2.9ms (Views: 0.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/boards/1" for 127.0.0.1 at 2016-06-19 19:44:48 +0800
+Processing by BoardsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mBoard Load (0.2ms)[0m  SELECT "boards".* FROM "boards" WHERE "boards"."id" = ? LIMIT 1  [["id", "1"]]
+  [1m[36mPost Load (0.1ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."board_id" = 1[0m
+  Rendered boards/show.html.erb within layouts/application (2.7ms)
+  Rendered common/_user_nav.erb (1.2ms)
+Completed 200 OK in 30.1ms (Views: 19.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-06-19 19:44:48 +0800
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2016-06-19 19:44:48 +0800
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:48 +0800
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+Served asset /posts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/boards.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:48 +0800
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:48 +0800
+Served asset /boards.js - 304 Not Modified (0ms)
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/boards.css?body=1" for 127.0.0.1 at 2016-06-19 19:44:48 +0800
+Served asset /boards.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:48 +0800
+Served asset /posts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-06-19 19:44:48 +0800
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-06-19 19:54:12 +0800
+Processing by BoardsController#index as HTML
+  [1m[35mBoard Load (0.3ms)[0m  SELECT "boards".* FROM "boards" 
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "posts" WHERE "posts"."board_id" = 1[0m
+  Rendered boards/index.html.erb within layouts/application (3.0ms)
+  Rendered common/_user_nav.erb (1.1ms)
+Completed 200 OK in 18.2ms (Views: 15.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/apple-touch-icon-precomposed.png" for 127.0.0.1 at 2016-06-19 19:54:12 +0800
+
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon-precomposed.png"):
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22.2) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22.2) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22.2) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22.2) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22.2) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-mini-profiler (0.10.1) lib/mini_profiler/profiler.rb:278:in `call'
+  railties (3.2.22.2) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22.2) lib/rails/application.rb:231:in `call'
+  railties (3.2.22.2) lib/rails/railtie/configurable.rb:30:in `method_missing'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:155:in `handle'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:109:in `rescue in block (2 levels) in start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:106:in `block (2 levels) in start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:96:in `each'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:96:in `block in start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:76:in `loop'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:76:in `start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:12:in `run'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/bin/nack_worker:4:in `<main>'
+
+
+  Rendered /Users/dpanaben/.rvm/gems/ruby-2.3.1/gems/actionpack-3.2.22.2/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (3.1ms)
+
+
+Started GET "/apple-touch-icon.png" for 127.0.0.1 at 2016-06-19 19:54:12 +0800
+
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon.png"):
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22.2) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22.2) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22.2) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22.2) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22.2) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-mini-profiler (0.10.1) lib/mini_profiler/profiler.rb:278:in `call'
+  railties (3.2.22.2) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22.2) lib/rails/application.rb:231:in `call'
+  railties (3.2.22.2) lib/rails/railtie/configurable.rb:30:in `method_missing'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:155:in `handle'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:109:in `rescue in block (2 levels) in start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:106:in `block (2 levels) in start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:96:in `each'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:96:in `block in start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:76:in `loop'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:76:in `start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:12:in `run'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/bin/nack_worker:4:in `<main>'
+
+
+  Rendered /Users/dpanaben/.rvm/gems/ruby-2.3.1/gems/actionpack-3.2.22.2/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-06-19 19:54:12 +0800
+Processing by BoardsController#index as HTML
+  [1m[35mBoard Load (0.2ms)[0m  SELECT "boards".* FROM "boards" 
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "posts" WHERE "posts"."board_id" = 1[0m
+  Rendered boards/index.html.erb within layouts/application (3.3ms)
+  Rendered common/_user_nav.erb (1.1ms)
+Completed 200 OK in 19.8ms (Views: 17.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/apple-touch-icon-precomposed.png" for 127.0.0.1 at 2016-06-19 19:54:13 +0800
+
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon-precomposed.png"):
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22.2) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22.2) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22.2) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22.2) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22.2) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-mini-profiler (0.10.1) lib/mini_profiler/profiler.rb:278:in `call'
+  railties (3.2.22.2) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22.2) lib/rails/application.rb:231:in `call'
+  railties (3.2.22.2) lib/rails/railtie/configurable.rb:30:in `method_missing'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:155:in `handle'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:109:in `rescue in block (2 levels) in start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:106:in `block (2 levels) in start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:96:in `each'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:96:in `block in start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:76:in `loop'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:76:in `start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:12:in `run'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/bin/nack_worker:4:in `<main>'
+
+
+  Rendered /Users/dpanaben/.rvm/gems/ruby-2.3.1/gems/actionpack-3.2.22.2/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.9ms)
+
+
+Started GET "/apple-touch-icon.png" for 127.0.0.1 at 2016-06-19 19:54:13 +0800
+
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon.png"):
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.22.2) lib/rails/rack/logger.rb:32:in `call_app'
+  railties (3.2.22.2) lib/rails/rack/logger.rb:16:in `block in call'
+  activesupport (3.2.22.2) lib/active_support/tagged_logging.rb:22:in `tagged'
+  railties (3.2.22.2) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.7) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.7) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.22.2) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.7) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.22.2) lib/action_dispatch/middleware/static.rb:83:in `call'
+  rack-mini-profiler (0.10.1) lib/mini_profiler/profiler.rb:278:in `call'
+  railties (3.2.22.2) lib/rails/engine.rb:484:in `call'
+  railties (3.2.22.2) lib/rails/application.rb:231:in `call'
+  railties (3.2.22.2) lib/rails/railtie/configurable.rb:30:in `method_missing'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:155:in `handle'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:109:in `rescue in block (2 levels) in start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:106:in `block (2 levels) in start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:96:in `each'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:96:in `block in start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:76:in `loop'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:76:in `start'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/lib/nack/server.rb:12:in `run'
+  /Users/dpanaben/Library/Application Support/Pow/Versions/0.5.0/node_modules/nack/bin/nack_worker:4:in `<main>'
+
+
+  Rendered /Users/dpanaben/.rvm/gems/ruby-2.3.1/gems/actionpack-3.2.22.2/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (1.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-06-19 19:54:13 +0800
+Processing by BoardsController#index as HTML
+  [1m[35mBoard Load (0.2ms)[0m  SELECT "boards".* FROM "boards" 
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "posts" WHERE "posts"."board_id" = 1[0m
+  Rendered boards/index.html.erb within layouts/application (3.4ms)
+  Rendered common/_user_nav.erb (1.3ms)
+Completed 200 OK in 19.7ms (Views: 17.4ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-06-19 19:54:13 +0800
+Served asset /application.css - 200 OK (0ms)
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2016-06-19 19:54:13 +0800
+Served asset /posts.css - 200 OK (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-06-19 19:54:13 +0800
+Served asset /jquery_ujs.js - 200 OK (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-06-19 19:54:14 +0800
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2016-06-19 19:54:14 +0800
+Served asset /posts.js - 200 OK (0ms)
+Served asset /jquery.js - 200 OK (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-06-19 19:54:14 +0800
+Served asset /application.js - 200 OK (0ms)
+
+
+Started GET "/assets/boards.css?body=1" for 127.0.0.1 at 2016-06-19 19:54:14 +0800
+Served asset /boards.css - 200 OK (0ms)
+
+
+Started GET "/assets/boards.js?body=1" for 127.0.0.1 at 2016-06-19 19:54:14 +0800
+Served asset /boards.js - 200 OK (0ms)

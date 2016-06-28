@@ -1,0 +1,14 @@
+<div class="user_navigation">
+	<%= link_to (t "welcome.home"), root_path %> |
+	<% if current_user && current_user.is_admin? %>
+		<%= link_to (t "welcome.panel"), admin_boards_path %> |
+	<% end %>
+
+	<% if user_signed_in? %>
+		Hi!  <%= current_user.email %>
+		<%= link_to (t "welcome.signout"), destroy_user_session_path, :method => :delete %>
+	<% else %>
+		<%= link_to (t "welcome.signin"), new_user_session_path %>
+		<%= link_to (t "welcome.signup"), new_user_registration_path %>
+	<% end %>
+</div>

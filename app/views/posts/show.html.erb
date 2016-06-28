@@ -1,0 +1,18 @@
+<h1>Post (<%= @post.id if current_user && current_user.is_admin? %>)</h1>
+<p><%= @post.title %></p>
+<p><%= @post.content %></p>
+<p><%= @post.created_at %></p>
+<p><%= @post.updated_at %></p>
+<% if @post.avatar? %>
+	<p><%= image_tag(@post.avatar.url(:medium)) %></p>
+<% end %>
+
+<% if current_user && @post.user == current_user %>
+	<%= link_to 'Edit', edit_board_post_path(@board, @post) %> |
+<% end %>
+
+<% if current_user && current_user.is_admin? %>
+	<%= link_to 'A-Edit', edit_admin_board_post_path(@board, @post) %> |
+<% end %>
+
+<%= link_to 'Back', board_path(@board) %>

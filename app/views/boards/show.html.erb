@@ -1,0 +1,53 @@
+<h1>Board (<%= @board.id %>)</h1>
+
+<p>Name: <%= @board.name %></p>
+<% if current_user && current_user.is_admin? %>
+	<p>Created: <%= @board.created_at %></p>
+	<p>Updated: <%= @board.updated_at %></p>
+<% end %>
+<h1>Listing Posts</h1>
+
+<table>
+	<tr>
+	<% if current_user && current_user.is_admin? %>
+		<th>B_ID</th>
+		<th>ID</th>
+		<th>Who Post</th>
+	<% end %>
+		<th>Title</th>
+		<th>Content</th>
+		<th>Created</th>
+		<th>Updated</th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
+<% @posts.each do |post| %>
+	<tr>
+	<% if current_user && current_user.is_admin? %>
+		<td><%= post.board_id %></td>
+		<td><%= post.id %></td>
+		<td><%= post.user.email %></td>
+	<% end %>
+		<td><%= post.title %></td>
+		<td><%= post.content %></td>
+		<td><%= post.created_at %></td>
+		<td><%= post.updated_at %></td>
+		<td><%= link_to 'Show', board_post_path(@board, post) %></td>
+	<% if current_user && post.user == current_user %>
+		<td><%= link_to 'Edit', edit_board_post_path(@board, post) %></td>
+		<td><%= link_to 'Destroy', board_post_path(@board, post), :confirm => 'Are you sure?', :method => :delete %></td>
+	<% end %>
+	<% if current_user && current_user.is_admin? %>
+		<td><%= link_to 'A-Edit', edit_admin_board_post_path(@board, post) %></td>
+		<td><%= link_to 'A-Destroy', admin_board_post_path(@board, post), :confirm => 'Are you sure?', :method => :delete %></td>
+	<% end %>		
+	</tr>
+<% end %>
+</table>
+
+<%= link_to 'New Post', new_board_post_path(@board) %> |
+<%= link_to 'A-Edit', edit_admin_board_path(@board) if current_user && current_user.is_admin? %>
+<%= link_to 'Back', boards_path %>

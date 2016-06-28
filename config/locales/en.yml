@@ -1,0 +1,54 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+    welcome:
+        panel: "Admin Panel"
+        home: "--HOME--"
+        title: "Forum123"
+        listingboards: "Listing Boards"
+        boardname: "Board Name"
+        postsize: "Posts"
+        paragraph: "Thank you for your visiting our store"
+        user: "User"
+        content: "Content"
+        created_at: "Created at"
+        new_tweet: "New Tweet"
+        edit: "E"
+        destroy: "D"
+        back: "Back"
+        submit: "Submit"
+        hello: "Hi!!"
+        confirm_sure: "Are you sure??"
+        signin: "Sign in"
+        signout: "Sign out"
+        signup: "Sign up"
+tw:
+    welcome:
+        panel: "管理介面"
+        home: "--首頁--"
+        title: "論壇123"
+        listingboards: "論壇列表"
+        boardname: "論壇名稱"
+        postsize: "貼文數"
+        paragraph: "歡迎來到我的叢林"
+        user: "使用者"
+        content: "內容"
+        created_at: "建立於"
+        new_tweet: "新的推~~"
+        edit: "編"
+        destroy: "刪"
+        back: "上一頁"
+        submit: "確認"
+        hello: "哈囉!!"
+        confirm_sure: "你確定要刪掉??"
+        signin: "登入"
+        signout: "登出"
+        signup: "註冊一個帳號"
+    activerecord:
+        errors:
+            models:
+                board:
+                    attributes:
+                        name:
+                            blank: "不能空白"

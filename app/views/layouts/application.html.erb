@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= (t "welcome.title") %></title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<span><%= link_to "中文版", :controller => controller.controller_name, 
+             :action => controller.action_name, :locale => "tw" %></span>
+<span><%= link_to "English", :controller => controller.controller_name, 
+             :action => controller.action_name, :locale => "en" %></span>
+
+<%= render :partial => "common/user_nav" %>
+<%= yield %>
+
+</body>
+</html>
